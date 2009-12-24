@@ -1,0 +1,62 @@
+==================
+Language configlet
+==================
+
+  >>> from zope import component
+  >>> from zope.proxy import removeAllProxies
+  >>> from zope.app.testing.functional import getRootFolder
+  >>> from zope.app.component.hooks import setSite
+  >>> from zope.testbrowser.testing import Browser
+
+  >>> root = getRootFolder()
+  >>> setSite(root)
+  >>> sm = root.getSiteManager()
+
+  >>> actor = Browser()
+  >>> actor.addHeader("Authorization", "Basic mgr:mgrpw")
+  >>> actor.handleErrors = False
+
+  >>> actor.open("http://localhost/settings/")
+  >>> actor.getLink('Language').click()
+  >>> actor.getControl(name='form.widgets.language:list').value = ['ru']
+  >>> actor.getControl(name='form.buttons.save').click()
+
+  >>> actor.open("http://localhost/")
+  >>> print actor.contents
+  <!DOCTYPE html...
+  ...
+  <thead> 
+     <tr>
+        <th>&nbsp;</th>
+        <th>Название</th>
+        <th>Заголовок</th>
+        <th>Создан</th>
+        <th>Изменен</th>
+     </tr>
+  </thead>
+  ...
+  </html>
+
+  >>> actor.open("http://localhost/settings/")
+  >>> actor.getLink('Language').click()
+  >>> actor.getControl(name="form.widgets.usebrowser:list").value = ['true']
+  >>> actor.getControl(name='form.widgets.language:list').value = ['ru']
+  >>> actor.getControl(name='form.buttons.save').click()
+
+  >>> actor.open("http://localhost/")
+  >>> print actor.contents
+  <!DOCTYPE html...
+  ...
+  <thead> 
+     <tr>
+        <th>&nbsp;</th>
+        <th>Name</th>
+        <th>Title</th>
+        <th>Created</th>
+        <th>Modified</th>
+     </tr>
+  </thead>
+  ...
+  </html>
+
+  >>> setSite(None)

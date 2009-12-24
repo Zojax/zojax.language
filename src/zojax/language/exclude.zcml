@@ -1,0 +1,5 @@
+<configure xmlns="http://namespaces.zope.org/zope">
+
+  <exclude package="zope.i18n" file="configure.zcml" />
+
+</configure>

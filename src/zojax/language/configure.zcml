@@ -1,0 +1,19 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:i18n="http://namespaces.zope.org/i18n"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   i18n_domain="zojax.language">
+
+  <zojax:configlet
+     name="system.language"
+     title="Language"
+     description="Configure site language settings."
+     schema=".interfaces.ISiteLanguage"
+     class=".configlet.SiteLanguage" />
+
+  <subscriber handler=".subscribers.languageSelector" />
+
+  <!-- translations -->
+  <i18n:registerTranslations directory="locales"/>
+
+</configure>
