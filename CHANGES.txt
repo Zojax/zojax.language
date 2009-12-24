@@ -1,0 +1,21 @@
+=======
+CHANGES
+=======
+
+0.2.1 (Unreleased)
+
+- Fixed getting language from request (ftp haven't adapter)
+
+
+0.2.0 (2009-11-18)
+------------------
+
+- Better languages vocabulary
+
+- Fixed 'Use browser setting' if language is not known
+
+
+0.1.0 (2009-08-12)
+------------------
+
+- Initial release.

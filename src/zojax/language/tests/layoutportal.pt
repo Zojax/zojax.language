@@ -1,0 +1,6 @@
+<html>
+  <body>
+    <tal:block tal:content="structure view/render" />
+  </body>
+</html>
+
