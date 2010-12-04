@@ -10,12 +10,12 @@
      description="Configure site language settings."
      schema=".interfaces.ISiteLanguage"
      class=".configlet.SiteLanguage" />
+
+  <subscriber handler=".subscribers.languageSelector" />
   
   <utility
      name="zojax.language.allowedLanguages"
      factory=".vocabulary.AllowedLanguagesVocabulary" />
-
-  
 
   <!-- translations -->
   <i18n:registerTranslations directory="locales"/>
