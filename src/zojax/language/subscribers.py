@@ -32,6 +32,12 @@ def languageSelector(context, event):
         if not configlet.usebrowser:
             languages.setPreferredLanguages([configlet.language])
         else:
-            del languages._getLanguagesData()['overridden']
-            del languages._getLanguagesData()['cached']
+            try:
+                del languages._getLanguagesData()['overridden']
+            except KeyError:
+                pass
+            try:
+                del languages._getLanguagesData()['cached']
+            except KeyError:
+                pass
         event.request.setupLocale()
