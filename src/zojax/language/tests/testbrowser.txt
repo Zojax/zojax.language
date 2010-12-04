@@ -18,6 +18,9 @@ Language configlet
 
   >>> actor.open("http://localhost/settings/")
   >>> actor.getLink('Language').click()
+  >>> actor.getControl(name='form.widgets.allowedLanguages:list').value = ['ru', 'en']
+  >>> actor.getControl(name='form.buttons.save').click()
+  >>> actor.reload()
   >>> actor.getControl(name='form.widgets.language:list').value = ['ru']
   >>> actor.getControl(name='form.buttons.save').click()
 

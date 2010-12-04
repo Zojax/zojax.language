@@ -28,11 +28,10 @@ class SiteLanguage(Negotiator):
     def getLanguage(self, langs, request):
         if self.usebrowser:
             if langs is None:
-                langs = [self.language]
+                langs = self.allowedLanguages
             return super(SiteLanguage, self).getLanguage(langs, request)
         else:
             return self.language
-
 
 def negotiate(context):
     return getUtility(ISiteLanguage).getLanguage(

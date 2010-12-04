@@ -16,8 +16,13 @@
 $Id$
 """
 import os
-from zope.i18n import translate, locales
+from copy import copy
+from zope import interface
+from zope.component import getUtility
+from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
+from zope.i18n import translate, locales
+
 
 locale = locales.locales.getLocale('en')
 
@@ -51,3 +56,13 @@ for name in os.listdir(os.path.join(os.path.dirname(locales.__file__), 'data')):
 
 terms.sort()
 LanguagesVocabulary = SimpleVocabulary([term for title, term in terms])
+
+
+class AllowedLanguagesVocabulary(object):
+    interface.implements(IVocabularyFactory)
+
+    def __call__(self, context):
+        from zojax.language.interfaces import ISiteLanguage
+        return SimpleVocabulary([copy(LanguagesVocabulary.getTerm(value)) for value in getUtility(ISiteLanguage).allowedLanguages])
+
+

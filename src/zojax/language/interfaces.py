@@ -31,10 +31,18 @@ class ISiteLanguage(INegotiator):
         title = _('Use browser setting'),
         default = False,
         required = True)
-
+    
+    allowedLanguages = schema.Set(title = _(u'Allowed Languages'),
+                                   description = _(u'Allowed site languages.'),
+                                    value_type=schema.Choice(
+                                            vocabulary = vocabulary.LanguagesVocabulary,
+                                            required = True),
+                                  default=set(['en'])
+                                    )
+    
     language = schema.Choice(
         title = _(u'Language'),
         description = _(u'Default site language.'),
-        vocabulary = vocabulary.LanguagesVocabulary,
+        vocabulary = 'zojax.language.allowedLanguages',
         default = u'en',
         required = True)
